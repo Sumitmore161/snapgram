@@ -5,7 +5,7 @@ import { getUserPosts, getUsers } from "@/lib/appwrite/api";
 import Loader from "@/components/shared/Loader";
 
 type UserProfile = {
-  $id: string;
+  id: string;
   name: string;
   username: string;
   email: string;
