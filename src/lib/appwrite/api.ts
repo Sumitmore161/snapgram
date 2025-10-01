@@ -115,6 +115,21 @@ export async function getUsers(limit?: number) {
     console.error(error);
   }
 }
+
+export async function getUserById(userId: string){
+  const queries = [Query.equal("$id", userId)];
+  try {
+    const user = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries,
+    );
+    if (!user) throw Error;
+    return user.documents[0];
+  } catch (error) {
+    console.error(error);
+  } 
+}
 // create post
 export async function createPost(post: INewPost) {
   try {
@@ -178,7 +193,7 @@ export async function updatePost(post: IUpdatePost) {
         throw Error;
       }
 
-      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+      image = { ...image , imageId: uploadedFile.$id };
     }
 
     // convert  tags to array
