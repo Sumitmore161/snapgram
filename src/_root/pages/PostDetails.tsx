@@ -19,13 +19,14 @@ const PostDetails = () => {
   const { data: post, isLoading } = useGetPostById(id);
 
   const { data: userPosts, isLoading: isUserPostsLoading } = useGetUserPosts(
-    post?.creator.$id,
+    post?.creator.id,
   );
 
   const { mutate: deletePost } = useDeletePost();
 
   const relatedPosts = userPosts?.documents.filter((post) => post.$id !== id);
 
+  
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
     navigate(-1);
@@ -59,7 +60,7 @@ const PostDetails = () => {
           <div className="post_details-info">
             <div className="flex-between w-full">
               <Link
-                to={`/profile/${post?.creator.$id}`}
+                to={`/profile/${post?.creator.id}`}
                 className="flex items-center gap-3"
               >
                 <img
@@ -88,8 +89,8 @@ const PostDetails = () => {
 
               <div className="flex-center gap-4">
                 <Link
-                  to={`/update-post/${post?.$id}`}
-                  className={`${user.id !== post?.creator.$id && "hidden"}`}
+                  to={`/update-post/${post?.id}`}
+                  className={`${user.id !== post?.creator.id && "hidden"}`}
                 >
                   <img
                     src={"/assets/icons/edit.svg"}
@@ -103,7 +104,7 @@ const PostDetails = () => {
                   onClick={handleDeletePost}
                   variant="ghost"
                   className={`post_details-delete_btn ${
-                    user.id !== post?.creator.$id && "hidden"
+                    user.id !== post?.creator.id && "hidden"
                   }`}
                 >
                   <img

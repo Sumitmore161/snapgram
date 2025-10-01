@@ -20,11 +20,11 @@ export type INewPost = {
   tags?: string;
 };
 
-export type IUpdatePost = {
+export type IUpdatePost =  {
   postId: string;
   caption: string;
   imageId: string;
-  imageUrl: URL | string;
+  imageUrl: string;
   file: File[];
   location?: string;
   tags?: string;
@@ -36,7 +36,7 @@ export type IUser = {
   username: string;
   email: string;
   bio: string;
-  imageUrl: URL | string;
+  imageUrl: string ;
 };
 
 export type INewUser = {
