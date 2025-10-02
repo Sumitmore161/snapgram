@@ -19,14 +19,14 @@ const PostDetails = () => {
   const { data: post, isLoading } = useGetPostById(id);
 
   const { data: userPosts, isLoading: isUserPostsLoading } = useGetUserPosts(
-    post?.creator.id,
+    post?.creator?.$id,
   );
 
   const { mutate: deletePost } = useDeletePost();
 
   const relatedPosts = userPosts?.documents.filter((post) => post.$id !== id);
 
-  
+  console.log("this is PostDetails: ",post?.creator?.$id)
   const handleDeletePost = () => {
     deletePost({ postId: id, imageId: post?.imageId });
     navigate(-1);
