@@ -47,6 +47,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return false;
     } catch (error) {
       console.error(error);
+      setUser(INITIAL_USER);
+      setIsAuthenticated(false);
       return false;
     } finally {
       setIsLoading(false);
@@ -54,16 +56,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    const cookieFallback = localStorage.getItem("cookieFallback");
-    if (
-      cookieFallback === "[]" ||
-      cookieFallback === null ||
-      cookieFallback === undefined
-    ) {
-      // TODO: Add cookie fallback
+    // const cookieFallback = localStorage.getItem("cookieFallback");
+    // if (
+    //   cookieFallback === "[]" ||
+    //   cookieFallback === null ||
+    //   cookieFallback === undefined
+    // ) {
+    //   // TODO: Add cookie fallback
+    //   navigate("/sign-in");
+    // }
+    // checkAuthUser();
+      const verifyUser = async () => {
+    const isLoggedIn = await checkAuthUser();
+    if (!isLoggedIn) {
       navigate("/sign-in");
     }
-    checkAuthUser();
+  };
+
+  verifyUser();
+
   }, []);
   const values = {
     user,
