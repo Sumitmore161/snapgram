@@ -1,6 +1,6 @@
 import Loader from "@/components/shared/Loader";
 import PostCard from "@/components/shared/PostCard";
-import { useGetRecentPosts, useGetUsers } from "@/lib/react-query/queries";
+import { useGetRecentPosts } from "@/lib/react-query/queries";
 import { Models } from "appwrite";
 
 const Home = () => {
@@ -9,13 +9,8 @@ const Home = () => {
     isLoading: isPostsLoading,
     isError: isPostsError,
   } = useGetRecentPosts();
-  const {
-    data: users,
-    isLoading: isUsersLoading,
-    isError: isUsersError,
-  } = useGetUsers();
 
-  if (isPostsError || isUsersError) {
+  if (isPostsError) {
     return (
       <div className="flex flex-1">
         <div className="home-container">
