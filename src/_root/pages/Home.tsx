@@ -15,6 +15,7 @@ const Home = () => {
     isError: isUsersError,
   } = useGetUsers();
 
+  {/* Removed changes of commit 3 and creating new commit 4*/}
   if (isPostsError || isUsersError) {
     return (
       <div className="flex flex-1">
